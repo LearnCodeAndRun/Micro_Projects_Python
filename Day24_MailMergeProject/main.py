@@ -1,0 +1,12 @@
+file1=open('./Input/Letters/starting_letter.txt','r')
+file2=open('./Input/Names/invited_names.txt','r')
+lst=file2.read().split('\n')
+for i in range(0,len(lst)):
+    file=open(f'./Output/ReadyToSend/Solution{i+1}.txt','w')
+    content=file1.read()
+    content=content.replace('[name]',lst[i])
+    file.write(content)
+    file.close()
+    file1.seek(0)
+file1.close()
+file2.close()
