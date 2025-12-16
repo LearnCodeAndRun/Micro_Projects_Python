@@ -13,7 +13,7 @@ scr.setup(600,400)
 scr.title("Hungry Snake")
 scr.tracer(0)
 snake=Snake()
-score=Scoreboard("HighScore.txt")
+score=Scoreboard("./SnakeGame_Day20&21/HighScore.txt")
 scr.update()
 scr.listen()
 game_is_on=True
