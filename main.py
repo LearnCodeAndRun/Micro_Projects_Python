@@ -1,16 +1,24 @@
-def display(name,student,dic):
-    for (index,row) in student_data_frame.iterrows():
-      if row['student']==name:
-        print(f"Score: {row['score']}")
-    nato_list=[dic[letter.upper()] for letter in name]
-    print(nato_list)
-student_dict = {
-    "student": ["Angela", "James", "Lily"], 
-    "score": [56, 76, 98]
-}
-import pandas
-student_data_frame = pandas.DataFrame(student_dict)
-content=pandas.read_csv('nato_phonetic_alphabet.csv')
-dic={row.letter:row.code for (index, row) in content.iterrows()}
-name=input("Enter a name: ").title()
-display(name,student_data_frame,dic)
+from turtle import Turtle,Screen
+from tkinter import messagebox as mb
+from draw_box import Draw
+from Turns import Play
+scr=Screen()
+scr.bgcolor("black")
+scr.title("Tic-Tac-Toe")
+a=None
+while a!='X' and a!='O':
+  a=scr.textinput("Start Game","\'X\' or \'O\'").upper()
+  if a!='X' and a!='O':
+    mb.showinfo("Error","Enter proper sign, \'X\' or \'O\' and nothing else")
+obj=Draw()
+obj.draw_square()
+obj.draw_lines()
+b=''
+if a=='X':
+  b='O'
+else:
+  b='X'
+scr.listen()
+use=Play(a,b,scr)
+use.start()
+scr.mainloop()
