@@ -77,4 +77,7 @@ class Play:
                 else:
                     mb.showinfo("Result","Congratulations, you won !")
                 return False
+        if all(i!=None for i in self.visited):
+            mb.showinfo("Result","Well played both ! It's a draw.")
+            return False
         return True
