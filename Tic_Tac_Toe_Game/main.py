@@ -1,17 +1,24 @@
 from turtle import Turtle,Screen
+from tkinter import messagebox as mb
 from draw_box import Draw
-from winner_check import Winner
-tim=Turtle()
-tim.color("azure")
+from Turns import Play
 scr=Screen()
-a=scr.textinput("Start Game","\'X\' or \'O\'").upper()
 scr.bgcolor("black")
 scr.title("Tic-Tac-Toe")
+a=None
+while a!='X' and a!='O':
+  a=scr.textinput("Start Game","\'X\' or \'O\'").upper()
+  if a!='X' and a!='O':
+    mb.showinfo("Error","Enter proper sign, \'X\' or \'O\' and nothing else")
 obj=Draw()
 obj.draw_square()
 obj.draw_lines()
-win=Winner()
+b=''
+if a=='X':
+  b='O'
+else:
+  b='X'
 scr.listen()
-scr.onscreenclick(win.click_handler)
-game_is_on=True
-scr.exitonclick()
+use=Play(a,b,scr)
+use.start()
+scr.mainloop()
