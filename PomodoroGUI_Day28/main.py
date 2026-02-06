@@ -12,9 +12,12 @@ LONG_BREAK_MIN = 20
 BASE_DIR=os.path.dirname(os.path.abspath(__file__))
 reps = 0
 timer = None
+def count_down(count):
+    if count>=0:
+      tomato.itemconfig(timer_text,text=f"{count//60:02d}:{count%60:02d}")
+      window.after(1000,count_down,count-1)
 def start_timer():
-    tomato.delete(timer_text)
-    timer_text=tomato.create_text(100,130,text=f"25:00",fill="white",font=(FONT_NAME,35,"bold"))
+    count_down(25*60)
 window=Tk()
 window.title("Pomodoro")
 window.config(padx=100,pady=50,bg=YELLOW)
@@ -31,4 +34,6 @@ img_path=os.path.join(BASE_DIR,"tomato.png")
 photo=PhotoImage(file=img_path)
 tomato.create_image(100,112,image=photo)
 timer_text=tomato.create_text(100,130,text=f"00:00",fill="white",font=(FONT_NAME,35,"bold"))
+checkmark_emoji=Label(text="✅",bg=YELLOW,fg=RED,font=(FONT_NAME,20,"bold"))
+checkmark_emoji.grid(column=1,row=3)
 window.mainloop()
