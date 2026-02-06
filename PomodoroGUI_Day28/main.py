@@ -10,21 +10,26 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 BASE_DIR=os.path.dirname(os.path.abspath(__file__))
-reps = 0
+reps = -1
 timer = None
 def count_down(count):
     if count>=0:
       tomato.itemconfig(timer_text,text=f"{count//60:02d}:{count%60:02d}")
       window.after(1000,count_down,count-1)
+    else:
+       start_timer()
 def start_timer():
-    for i in range(8):
-       if i%2==0:
-          count_down(60)
-       else:
-          if i==7:
-                count_down(2*60)
-          else:
-                count_down(30)
+    global reps
+    reps+=1
+    if reps==0 or reps%2==0:
+       text.config(text="WORK TIME")
+       count_down(WORK_MIN*60)
+    elif reps%7==0:
+       text.config(text="LONG BREAK")
+       count_down(LONG_BREAK_MIN*60)
+    else:
+       text.config(text="SHORT BREAK")
+       count_down(SHORT_BREAK_MIN*60)
 window=Tk()
 window.title("Pomodoro")
 window.config(padx=100,pady=50,bg=YELLOW)
