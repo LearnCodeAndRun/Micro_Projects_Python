@@ -17,7 +17,14 @@ def count_down(count):
       tomato.itemconfig(timer_text,text=f"{count//60:02d}:{count%60:02d}")
       window.after(1000,count_down,count-1)
 def start_timer():
-    count_down(25*60)
+    for i in range(8):
+       if i%2==0:
+          count_down(60)
+       else:
+          if i==7:
+                count_down(2*60)
+          else:
+                count_down(30)
 window=Tk()
 window.title("Pomodoro")
 window.config(padx=100,pady=50,bg=YELLOW)
