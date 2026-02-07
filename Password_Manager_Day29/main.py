@@ -16,27 +16,27 @@ lock.create_image(100,100,image=lock_image)
 lock.grid(row=0,column=1,padx=20)
 
 # Creating website label
-website=Label(text="Website",fg="black",bg="#D3D3D3",highlightthickness=0,font=("Arial",10,"bold"))
+website=Label(text="Website:",fg="black",bg="#D3D3D3",highlightthickness=0,font=("Arial",10,"bold"))
 website.grid(row=1,column=0)
 
 # Creating website entry
-website_entry=Entry(window,width=20)
+website_entry=Entry(window,width=35)
 website_entry.grid(row=1,column=0,columnspan=3)
 
 # Creating email / username label
-email=Label(text="Email / Username",bg="#D3D3D3",fg="black",font=("Arial",10,"bold"))
+email=Label(text="Email / Username:",bg="#D3D3D3",fg="black",font=("Arial",10,"bold"))
 email.grid(row=2,column=0,padx=20)
 
 # Creating email / username entry
-email_entry=Entry(window,width=20)
+email_entry=Entry(window,width=35)
 email_entry.grid(row=2,column=0,columnspan=2)
 
 # Creating password label
-password=Label(text="Password",fg="black",bg="#D3D3D3",font=("Arial",10,"bold"))
+password=Label(text="Password:",fg="black",bg="#D3D3D3",font=("Arial",10,"bold"))
 password.grid(row=3,column=0)
 
 # Creating password entry
-password_entry=Entry(window,width=20)
+password_entry=Entry(window,width=21)
 password_entry.grid(row=3,column=0,columnspan=2)
 
 # Creating generate password button
