@@ -14,7 +14,7 @@ reps = 0
 timer = None
 def reset_timer():
    global reps
-   reps=-1
+   reps=0
    window.after_cancel(timer)
    tomato.itemconfig(timer_text,text="00:00")
    text.config(text="TIMER",fg=GREEN)
@@ -36,7 +36,7 @@ def start_timer():
           for _ in range(4):
              mark+="✅"
           checkmark_emoji.config(text=mark)
-          count_down(30)
+          count_down(LONG_BREAK_MIN*60)
     elif reps%2==0:
        mark=""
        for _ in range(reps//2):
@@ -44,12 +44,12 @@ def start_timer():
        text.config(text="SHORT BREAK",fg=PINK)
        checkmark_emoji.config(text=mark)
        checkmark_emoji.grid(column=1,row=3)
-       count_down(10)
+       count_down(SHORT_BREAK_MIN*60)
     else:
         if reps==1:
           checkmark_emoji.grid_forget()
         text.config(text="WORK TIME",fg=RED)
-        count_down(20)
+        count_down(WORK_MIN*60)
 window=Tk()
 window.title("Pomodoro")
 window.config(padx=100,pady=50,bg=YELLOW)
