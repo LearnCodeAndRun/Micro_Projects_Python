@@ -17,9 +17,7 @@ def generate_password():
     password_list.extend([random.choice(symbols) for _ in range(nr_symbols)])
     password_list.extend([random.choice(numbers) for _ in range(nr_numbers)])
     random.shuffle(password_list)
-    final_password=""
-    for i in password_list:
-        final_password+=i
+    final_password=''.join(password_list)
     password_entry.insert(0,final_password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
