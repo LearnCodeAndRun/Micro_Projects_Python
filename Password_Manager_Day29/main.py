@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox as mb
 import os
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -16,9 +17,11 @@ def save_details():
     data_file.write(password_details)
     data_file.write("\n")
     data_file.close()
+    mb.showinfo(title="Success",message="Data saved successfully")
     website_entry.delete(0,END)
     email_entry.delete(0,END)
     password_entry.delete(0,END)
+    website_entry.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window=Tk()
