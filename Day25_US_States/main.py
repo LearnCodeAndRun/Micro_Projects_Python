@@ -1,12 +1,12 @@
 import turtle,pandas,time,scoreboard
 from tkinter import messagebox as mb
-data=pandas.read_csv('./50_states.csv')
+data=pandas.read_csv('./Day25_US_States/50_states.csv')
 dic=data.to_dict()
 scr=turtle.Screen()
 scr.title("US States Game")
-scr.addshape('./blank_states_img.gif')
+scr.addshape('./Day25_US_States/blank_states_img.gif')
 tim=turtle.Turtle()
-tim.shape('./blank_states_img.gif')
+tim.shape('./Day25_US_States/blank_states_img.gif')
 start_time=time.time()
 store_score=scoreboard.Score()
 game_is_on=True
@@ -18,9 +18,8 @@ while game_is_on:
   key=list(dic['state'].keys())
   print(key)
   if len(key)==0 or key[0] in state_value:
-         game_is_on=False
-         mb.showinfo('Game Over','Wrong city name')
-         break
+         mb.showinfo('Wrong','No city of that name exists or you have\n already entered that city')
+         continue
   state_value[key[0]]=True
   obj=turtle.Turtle()
   obj.color('black')
