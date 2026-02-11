@@ -24,15 +24,14 @@ elif choice=='hard':
    for i in range(5,0,-1):
      print(f"You have {i} attempts to guess the number")
      chosen_number=int(input("Make a guess: "))
-     if chosen_number<actual_number:
+     if chosen_number<actual_number and i!=1:
         print("Too low\nGuess again")
-     elif chosen_number>actual_number:
+     elif chosen_number>actual_number and i!=1:
         print("Too high\nGuess again")
-     else:
+     elif i==1 and chosen_number!=actual_number:
+        print(f"You have run out of guesses, you lose, the actual number was {actual_number}")
+     elif chosen_number==actual_number:
         print(f"You got it! The answer was {actual_number}")
-        flag=1
         break
-   if flag==0:
-    print("You have run out of guesses, you lose")
 else:
    print("Invalid choice")
