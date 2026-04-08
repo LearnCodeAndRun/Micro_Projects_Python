@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox as mb
 import os,random,pyperclip
+import json
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_password():
@@ -24,7 +25,6 @@ def generate_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save_details():
-    data_file=open('./Password_Manager_Day29/data.txt','a')
     website_name=website_entry.get()
     email_id=email_entry.get()
     password_details=password_entry.get()
@@ -42,8 +42,18 @@ def save_details():
         password_entry.delete(0,END)
         website_entry.focus()
         return
-    data_file.write(f"{website_name} | {email_id} | {password_details}\n")
-    data_file.close()
+    new_data={
+        website_name:{
+            "email":email_id,
+            "password":password_details
+        }
+    }
+    try:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__))),"data.json"):
+            data=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__))),"data.json"))
+    except FileNotFoundError:
+        data={}
+    
     mb.showinfo(title="Success",message="Data saved successfully")
     website_entry.delete(0,END)
     email_entry.delete(0,END)
