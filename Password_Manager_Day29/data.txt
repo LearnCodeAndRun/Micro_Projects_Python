@@ -1,4 +1,15 @@
-YGYH | JBLJB | yG+!+*MSPh24EeL
-HHKJ | HOUBLI | Wk8ur#2V&hJ0$6TKr+
-udbfj | kdnvld | LapO0g%7!WW2w$f
-kugbdui | kugub | cJJA$YF36Fn4%x)5(
+{
+    "Amazon": {
+        "email": "aneeshd5467@gmail.com",
+        "password": "mqP4#72UJj&#YsNL2"
+    }
+}{
+    "Amazon": {
+        "email": "aneeshd5467@gmail.com",
+        "password": "mqP4#72UJj&#YsNL2"
+    },
+    "Flipkart": {
+        "email": "anindita4562@yahoo.biz",
+        "password": "f2&%Or9gVKnQ*4r"
+    }
+}
