@@ -48,12 +48,15 @@ def save_details():
             "password":password_details
         }
     }
+    data_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),"data.json")
     try:
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__))),"data.json"):
-            data=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__))),"data.json"))
+        with open(data_path,"r") as f:
+            data=json.load(f)
     except FileNotFoundError:
         data={}
-    
+    data.update(new_data)
+    with open(data_path,"w")as f:
+        json.dump(data,f,indent=4)
     mb.showinfo(title="Success",message="Data saved successfully")
     website_entry.delete(0,END)
     email_entry.delete(0,END)
