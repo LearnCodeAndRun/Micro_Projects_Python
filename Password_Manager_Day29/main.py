@@ -42,6 +42,7 @@ def save_details():
         password_entry.delete(0,END)
         website_entry.focus()
         return
+    website_name.title()
     new_data={
         website_name:{
             "email":email_id,
@@ -63,6 +64,24 @@ def save_details():
     password_entry.delete(0,END)
     website_entry.focus()
 
+# -------------------------- FIND PASSWORD -----------------------------#
+
+def find_password():
+    website_details=website_entry.get()
+    if not website_details:
+        mb.showerror(title="Empty",message="Write something in the website blank")
+        return
+    website_details=website_details.title()
+    data_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),"data.json")
+    try:
+        with open(data_path,"r") as f:
+            data=json.load(f)
+            mb.showinfo(title="Data found",message=f"Password for {website_details}: {data[website_details]['password']}")
+    except FileNotFoundError:
+        mb.showerror(title="Empty file",message="No data found")
+    except KeyError:
+        mb.showerror(title="Website Not Found",message="No such website name present")
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window=Tk()
@@ -80,8 +99,8 @@ website=Label(text="Website:",fg="black",bg="#D3D3D3",highlightthickness=0,font=
 website.grid(row=1,column=0,sticky="EW")
 
 # Creating website entry
-website_entry=Entry(window,width=35)
-website_entry.grid(row=1,column=1,columnspan=2,sticky="EW")
+website_entry=Entry(window,width=21)
+website_entry.grid(row=1,column=1,sticky="EW")
 website_entry.focus()
 
 # Creating email / username label
@@ -107,5 +126,9 @@ generate_password.grid(row=3,column=2,sticky="EW",padx=(10,0))
 # Creating add button
 add_to_text=Button(text="Add",command=save_details,fg="black",width=36,bg="white",relief="raised")
 add_to_text.grid(row=4,column=1,columnspan=2,pady=20,sticky="EW")
+
+# Creating search button
+search=Button(text="Search",command=find_password,fg="black",bg="white",width=14,relief="raised")
+search.grid(row=1,column=2,padx=(10,0),sticky="EW")
 
 window.mainloop()
