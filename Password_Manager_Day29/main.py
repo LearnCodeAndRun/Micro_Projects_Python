@@ -1,7 +1,15 @@
 from tkinter import *
 from tkinter import messagebox as mb
+from cryptography.fernet import Fernet
 import os,random,pyperclip
 import json
+
+# ------------------------------PASSWORD KEY -------------------------------------#
+
+def load_key():
+    key_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),"key.key")
+    return open(key_path,"rb").read()
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_password():
@@ -42,11 +50,14 @@ def save_details():
         password_entry.delete(0,END)
         website_entry.focus()
         return
-    website_name.title()
+    website_name=website_name.title()
+    key=load_key()
+    fernet=Fernet(key)
+    encrypted_password=fernet.encrypt(password_details.encode()).decode()
     new_data={
         website_name:{
             "email":email_id,
-            "password":password_details
+            "password":encrypted_password
         }
     }
     data_path=os.path.join(os.path.dirname(os.path.abspath(__file__)),"data.json")
@@ -76,11 +87,24 @@ def find_password():
     try:
         with open(data_path,"r") as f:
             data=json.load(f)
-            mb.showinfo(title="Data found",message=f"Password for {website_details}: {data[website_details]['password']}")
+            key=load_key()
+            fernet=Fernet(key)
+            password=data[website_details]["password"]
+            decrypted_password=fernet.decrypt(password.encode()).decode()
+            mb.showinfo(title="Data found",message=f"Password for {website_details}: {decrypted_password}")
+    except json.JSONDecodeError:
+        mb.showerror(title="Empty JSON file",message="No website name found, file is empty")
     except FileNotFoundError:
-        mb.showerror(title="Empty file",message="No data found")
+        mb.showerror(title="No file exists",message="No data found")
     except KeyError:
         mb.showerror(title="Website Not Found",message="No such website name present")
+
+# -------------------------KEY FILE CREATION----------------------------#
+
+key_file=os.path.join(os.path.dirname(os.path.abspath(__file__)),"key.key")
+if not os.path.exists(key_file):
+    with open(key_file,"wb") as f:
+        f.write(Fernet.generate_key())
 
 # ---------------------------- UI SETUP ------------------------------- #
 
